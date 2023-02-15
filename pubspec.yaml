@@ -1,0 +1,38 @@
+name: mbank_test
+description: test task
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  logger: ^1.1.0
+
+  # Remote API
+  dio: ^4.0.6
+  internet_connection_checker:
+
+  # Local cache
+  shared_preferences:
+
+  # state management
+  flutter_bloc:
+
+  # ui
+  fluttertoast: ^8.1.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
