@@ -41,8 +41,19 @@ class MfrRepoImpl extends MfrRepo {
   }
 
   @override
-  Future<List<Model>> getModels(int makeID) {
-    // TODO: implement getModels
-    throw UnimplementedError();
+  Future<List<Model>?> getModels(int mfrID) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final makeID = await apiService.getMakeID(mfrID);
+        final models = await apiService.getModels(makeID);
+        return models;
+      } on ServerException {
+        UIMessages.showErrToast("Server error");
+        return null;
+      }
+    } else {
+      UIMessages.showErrToast("Internet connection error");
+      return null;
+    }
   }
 }

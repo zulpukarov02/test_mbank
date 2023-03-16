@@ -39,14 +39,29 @@ class ApiServiceImpl implements ApiService {
       rethrow;
     }
   }
-
+  @override
+  Future<int> getMakeID(int mfrID) async {
+    try {
+      final response =
+      await _dio.get('$baseUrl/GetMakeForManufacturer/$mfrID?format=json');
+      if (response.statusCode == 200) {
+        final makes = response.data;
+        return (makes['Results'] as List)[0]['Make_ID'];
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      ConsoleMessages.showErrorMessage(e);
+      rethrow;
+    }
+  }
   @override
   Future<List<Model>> getModels(int makeID) async {
     try {
       final response =
           await _dio.get('$baseUrl/GetModelsForMakeId/$makeID?format=json');
       if (response.statusCode == 200) {
-        final models = json.decode(response.data);
+        final models = response.data;
         return (models['Results'] as List)
             .map((model) => Model.fromJson(model))
             .toList();

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mbank_test/data/entities/mfr.dart';
+import 'package:mbank_test/presentation/widgets/car_models_widget.dart';
 
 class DetailScreen extends StatelessWidget {
+  static const valueKey = ValueKey('DetailScreen');
   final Mfr mfr;
 
   const DetailScreen({
@@ -21,12 +23,21 @@ class DetailScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               mfr.mfrName,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 35,),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+              ),
               textAlign: TextAlign.center,
             ),
           ),
+          const SizedBox(
+            height: 30,
+          ),
+          Expanded(child: CarModelsWidget(mfrID: mfr.id,))
         ],
       ),
     );
   }
 }
+
+
